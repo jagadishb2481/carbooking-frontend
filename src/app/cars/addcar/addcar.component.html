@@ -1,0 +1,36 @@
+<form (ngSubmit)="onSubmit()">
+    <div class="form-group col-md-3" >
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="newCar.name" required>
+    </div>
+  
+    <div class="form-group col-md-3" >
+      <label class="label label-primary" for="model">Model</label>
+      <input type="text" class="form-control" id="model" name="model" [(ngModel)]="newCar.model" required>
+    </div>
+    <div class="form-group col-md-3" >
+        <label for="color">Color</label>
+        <input type="text" class="form-control" id="color" name="color" [(ngModel)]="newCar.color" required>
+      </div>
+      <div class="form-group col-md-3" >
+        <label for="carType">CarType</label>
+        <input type="text" class="form-control" id="carType" name="carType" [(ngModel)]="newCar.carType" required>
+      </div>
+      <div class="form-group col-md-3" >
+        <label for="plateNumber">PlateNumber</label>
+        <input type="text" class="form-control" id="plateNumber" name="plateNumber" [(ngModel)]="newCar.plateNumber" required>
+      </div>
+     
+  
+    <div class="form-group col-md-3" >
+      <label for="year">MakeYear:</label>
+      <input type="number" class="form-control" id="makeYear" name="makeYear" [(ngModel)]="newCar.makeYear" required>
+    </div>
+  
+    <div class="form-group col-md-3" >
+      <label for="pricePerDay">PricePerDay</label>
+      <input type="number" class="form-control" id="pricePerDay" name="pricePerDay" [(ngModel)]="newCar.pricePerDay" required>
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Add Car</button>
+  </form>

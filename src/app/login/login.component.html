@@ -1,0 +1,22 @@
+
+<div align="center" class="background-wrap">
+    <div class="background"></div>
+
+  <form id="accesspanel" >
+    <h1 class="card-header">Login Page</h1>
+    <div class="inset">
+      <p>
+        <input type="text" name="username" [(ngModel)]="customer.username" id="username" placeholder="username">
+      </p>
+      <p>
+        <input type="password" name="password" [(ngModel)]="customer.password" id="password" placeholder="password">
+      </p>
+     <p>
+      <input type="submit" name="Login" id="go" value="Login" (click)="doLogin()">
+      &nbsp;
+      <a routerLink="add" class="btn btn-primary active" role="button" routerLinkActive="active">New User</a>
+        </p>
+    </div>
+  </form>
+
+</div>

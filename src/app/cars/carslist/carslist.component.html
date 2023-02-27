@@ -1,0 +1,63 @@
+<div class="container">
+    <h1>Cars</h1> <a routerLink="addCar" class="btn btn-primary active" role="button" routerLinkActive="active">Add Car</a>
+    <table class="table table-hover">
+        <thead >
+            <tr class="bg-color-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Model</th>
+                <th scope="col">MakeYear</th>
+                <th scope="col">Color</th>
+                <th scope="col">CarType</th>
+                <th scope="col">PlateNumber</th>
+                <th scope="col">PricePerDay</th>
+                <th scope="col">AvailabilityStatus</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="container" *ngFor="let car of cars">
+                <td>{{ car.id }}</td>
+                <td *ngIf="selectedCar?.id !== car.id">{{ car.name }}</td>
+                <td *ngIf="selectedCar?.id === car.id">
+                    <input type="text" [(ngModel)]="car.name" />
+                </td>
+                <td *ngIf="selectedCar?.id !== car.id">{{ car.model }}</td>
+                <td *ngIf="selectedCar?.id === car.id">
+                    <input type="text" [(ngModel)]="car.model" />
+                </td>
+                <td *ngIf="selectedCar?.id !== car.id">{{ car.makeYear }}</td>
+                <td *ngIf="selectedCar?.id === car.id">
+                    <input type="number" [(ngModel)]="car.makeYear" />
+                </td>
+                <td *ngIf="selectedCar?.id !== car.id">{{ car.color }}</td>
+                <td *ngIf="selectedCar?.id === car.id">
+                    <input type="text" [(ngModel)]="car.color" />
+                </td>
+                <td *ngIf="selectedCar?.id !== car.id">{{ car.carType }}</td>
+                <td *ngIf="selectedCar?.id === car.id">
+                    <input type="text" [(ngModel)]="car.carType" />
+                </td>
+                <td *ngIf="selectedCar?.id !== car.id">{{ car.plateNumber }}</td>
+                <td *ngIf="selectedCar?.id === car.id">
+                    <input type="text" [(ngModel)]="car.plateNumber" />
+                </td>
+                <td *ngIf="selectedCar?.id !== car.id">{{ car.pricePerDay }}</td>
+                <td *ngIf="selectedCar?.id === car.id">
+                    <input type="number" [(ngModel)]="car.pricePerDay" />
+                </td>
+                <td *ngIf="selectedCar?.id !== car.id">{{ car.available ? 'Available': 'Booked' }}</td>
+                <td *ngIf="selectedCar?.id === car.id">
+                    <input type="text" [(ngModel)]="car.available" />
+                </td>
+                <td>
+                    <button *ngIf="selectedCar?.id !== car.id" class="btn btn-warning active" (click)="editCar(car)">Edit</button>
+                    <button *ngIf="selectedCar?.id === car.id" class="btn btn-primary active" (click)="updateCar(car)">Update</button>&nbsp;
+                    <button *ngIf="selectedCar?.id === car.id" class="btn btn-danger active" (click)="cancelEdit(car)">Cancel</button> &nbsp;
+                    <button class="btn btn-danger active" (click)="deleteCar(car.id)">Delete</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
