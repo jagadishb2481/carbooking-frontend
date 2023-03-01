@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Car } from 'src/app/car';
 import { CarbookingService } from 'src/app/carbooking.service';
 
@@ -8,13 +9,18 @@ import { CarbookingService } from 'src/app/carbooking.service';
   styleUrls: ['./carslist.component.css']
 })
 export class CarslistComponent {
-  cars: Car[] = [];
+  cars: Car[]  = [];
   //showEditForm: boolean = false;
   selectedCar: Car| null = null;
+
+  displayedColumns: string[] = ['id', 'name', 'model','makeYear', 'carType', 'color', 'plateNumber', 'pricePerDay', 'availabilityStatus'];
+  dataSource = new MatTableDataSource<Car>();
+  filterValue: string = '';
   constructor(private carService: CarbookingService) { }
 
   ngOnInit() {
     this.getCarsList();
+    
   }
 
   deleteCar(id: number) {
@@ -28,7 +34,17 @@ export class CarslistComponent {
   getCarsList(){
     this.carService.getCars().subscribe(data => {
       this.cars = data;
+      
+       this.cars.forEach(car => {
+      car.availabilityStatus = car.available ? "Available" : "Booked";
+     });
+     
+     this.dataSource = new MatTableDataSource(this.cars);
+    // console.log(JSON.stringify(this.dataSource));
     });
+    
+
+    
   }
 
   editCar(car: Car) {
@@ -49,4 +65,11 @@ export class CarslistComponent {
     });
   }
   }
+  applyFilter(event:Event) {
+    console.log("inside filter");
+    this.filterValue = (event.target as HTMLInputElement).value;
+    //this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = this.filterValue.trim().toLowerCase();
+  }
+
 }

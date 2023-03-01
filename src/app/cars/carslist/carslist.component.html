@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <h1>Cars</h1> <a routerLink="addCar" class="btn btn-primary active" role="button" routerLinkActive="active">Add Car</a>
     <table class="table table-hover">
         <thead >
@@ -60,4 +60,61 @@
 
         </tbody>
     </table>
-</div>
+</div> -->
+<mat-form-field>
+    <mat-label>Search</mat-label>
+    <input  matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+  </mat-form-field> 
+<table mat-table class="table table-hover" [dataSource]="dataSource">
+    <!-- Define the table columns -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let car"> {{car.id}} </td>
+      </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let car"> {{car.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef> Model </th>
+      <td mat-cell *matCellDef="let car"> {{car.model}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="makeYear">
+      <th mat-header-cell *matHeaderCellDef> MakeYear </th>
+      <td mat-cell *matCellDef="let car"> {{car.makeYear}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="carType">
+        <th mat-header-cell *matHeaderCellDef> CarType </th>
+        <td mat-cell *matCellDef="let car"> {{car.carType}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="color">
+        <th mat-header-cell *matHeaderCellDef> Color </th>
+        <td mat-cell *matCellDef="let car"> {{car.color}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="plateNumber">
+        <th mat-header-cell *matHeaderCellDef> PlateNumber </th>
+        <td mat-cell *matCellDef="let car"> {{car.plateNumber}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pricePerDay">
+        <th mat-header-cell *matHeaderCellDef> PricePerDay </th>
+        <td mat-cell *matCellDef="let car"> {{car.pricePerDay}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="availabilityStatus">
+        <th mat-header-cell *matHeaderCellDef> AvailabilityStatus </th>
+        <td mat-cell *matCellDef="let car"> {{car.availabilityStatus }} </td>
+      </ng-container>
+    
+  
+    <!-- Use the `mat-header-row` and `mat-row` directives to define the table headers and rows -->
+    <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+</table>
+  

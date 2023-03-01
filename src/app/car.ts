@@ -8,6 +8,7 @@ export class Car {
     plateNumber:string;
     pricePerDay:number;
     available:boolean;
+    availabilityStatus:string;
     color:String;
     editing:boolean;
     constructor() { 
@@ -22,6 +23,7 @@ export class Car {
       this.available=true;
       this.color='';
       this.editing=false;
+      this.availabilityStatus='';
    }
 
   }
