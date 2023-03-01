@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>Edit Car</h2>
+    <mat-dialog-content>
+      <form>
+       
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" [(ngModel)]="data.name" name="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Model</mat-label>
+          <input matInput placeholder="Model" [(ngModel)]="data.model" name="model">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>MakeYear</mat-label>
+          <input matInput placeholder="MakeYear" [(ngModel)]="data.makeYear" name="makeYear">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>CarType</mat-label>
+            <input matInput placeholder="CarType" [(ngModel)]="data.carType" name="carType">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Color</mat-label>
+            <input matInput placeholder="Color" [(ngModel)]="data.color" name="color">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>PlateNumber</mat-label>
+            <input matInput placeholder="PlateNumber" [(ngModel)]="data.plateNumber" name="plateNumber">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>PricePerDay</mat-label>
+            <input matInput placeholder="PricePerDay" [(ngModel)]="data.pricePerDay" name="pricePerDay">
+          </mat-form-field>
+          <!-- <mat-form-field>
+            <mat-label>AvailabilityStatus</mat-label>
+            <input matInput placeholder="AvailabilityStatus" [(ngModel)]="data.availabilityStatus" name="availabilityStatus">
+          </mat-form-field> -->
+          <mat-form-field>
+            <mat-label>AvailabilityStatus</mat-label>
+            <mat-select [(ngModel)]="data.availabilityStatus" name="availabilityStatus">
+              <mat-option value="Available" >Available</mat-option>
+              <mat-option value="Booked" >Booked</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- <mat-form-field>
+            <mat-label>AvailabilityStatus</mat-label>
+            <mat-radio-group name="available" [(ngModel)]="data.available">
+              <mat-radio-button value="true">Available</mat-radio-button>
+              <mat-radio-button value="false">Booked</mat-radio-button>
+            </mat-radio-group>
+          </mat-form-field> -->
+          
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="onCancel()">Cancel</button>
+      <button mat-button color="primary" (click)="onUpdate()">Update</button>
+    </mat-dialog-actions>

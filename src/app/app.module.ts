@@ -18,7 +18,11 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { CarslistComponent } from './cars/carslist/carslist.component';
 import { AddcarComponent } from './cars/addcar/addcar.component';
-
+import { MatIconModule } from '@angular/material/icon';
+import { CarEditDialogComponent } from './cars/car-edit-dialog/car-edit-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,9 @@ import { AddcarComponent } from './cars/addcar/addcar.component';
     LoginComponent,
     HomeComponent,
     CarslistComponent,
-    AddcarComponent
+    AddcarComponent,
+    CarEditDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,10 +43,13 @@ import { AddcarComponent } from './cars/addcar/addcar.component';
     MatInputModule,
     MatSortModule,
     MatPaginatorModule,
+    MatIconModule,
     MatButtonModule,
+    MatDialogModule ,
     MatSelectModule,
     MatPseudoCheckboxModule,
     MatTooltipModule,
+    MatRadioModule,
     BrowserAnimationsModule
   ],
   providers: [],
