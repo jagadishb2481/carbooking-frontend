@@ -3,6 +3,11 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 /* 
 
 /* Customize the table header appearance */

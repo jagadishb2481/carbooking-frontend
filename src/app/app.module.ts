@@ -20,9 +20,14 @@ import { CarslistComponent } from './cars/carslist/carslist.component';
 import { AddcarComponent } from './cars/addcar/addcar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CarEditDialogComponent } from './cars/car-edit-dialog/car-edit-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { CarAddDialogComponent } from './cars/car-add-dialog/car-add-dialog.component';
+import { CustomersListComponent } from './customers/customers-list/customers-list.component';
+import { CustomerEditDialogComponent } from './customers/customer-edit-dialog/customer-edit-dialog.component';
+import { CustomerAddDialogComponent } from './customers/customer-add-dialog/customer-add-dialog.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +37,12 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     CarslistComponent,
     AddcarComponent,
     CarEditDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    CarAddDialogComponent,
+    CustomersListComponent,
+    CustomerEditDialogComponent,
+    CustomerAddDialogComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

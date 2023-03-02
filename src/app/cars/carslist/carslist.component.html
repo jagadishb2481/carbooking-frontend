@@ -61,72 +61,73 @@
         </tbody>
     </table>
 </div> -->
+<app-home></app-home>
+<a class="btn btn-primary active" role="button" (click)="openAddDialog()">Add Car</a>
 <mat-form-field>
-    <mat-label>Search</mat-label>
-    <input  matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
-  </mat-form-field> 
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+</mat-form-field>
 <table mat-table class="table table-hover" matSort [dataSource]="dataSource">
-    <!-- Define the table columns -->
-    <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
-        <td mat-cell *matCellDef="let car"> {{car.id}} </td>
-      </ng-container>
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let car"> {{car.name}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="model">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
-      <td mat-cell *matCellDef="let car"> {{car.model}} </td>
-    </ng-container>
-  
-    <ng-container matColumnDef="makeYear">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> MakeYear </th>
-      <td mat-cell *matCellDef="let car"> {{car.makeYear}} </td>
-    </ng-container>
+  <!-- Define the table columns -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+    <td mat-cell *matCellDef="let car"> {{car.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let car"> {{car.name}} </td>
+  </ng-container>
 
-    <ng-container matColumnDef="carType" >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> CarType </th>
-        <td mat-cell *matCellDef="let car"> {{car.carType}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="color">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
-        <td mat-cell *matCellDef="let car"> {{car.color}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="plateNumber">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> PlateNumber </th>
-        <td mat-cell *matCellDef="let car"> {{car.plateNumber}} </td>
-      </ng-container>
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Model </th>
+    <td mat-cell *matCellDef="let car"> {{car.model}} </td>
+  </ng-container>
 
-      <ng-container matColumnDef="pricePerDay">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> PricePerDay </th>
-        <td mat-cell *matCellDef="let car"> {{car.pricePerDay}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="availabilityStatus">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> AvailabilityStatus </th>
-        <td mat-cell *matCellDef="let car"> {{car.availabilityStatus }} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let car">
-          <button mat-icon-button color="primary" (click)="openEditDialog(car)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="openDeleteDialog(car.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-  
-    <!-- Use the `mat-header-row` and `mat-row` directives to define the table headers and rows -->
-    <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
+  <ng-container matColumnDef="makeYear">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> MakeYear </th>
+    <td mat-cell *matCellDef="let car"> {{car.makeYear}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="carType">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> CarType </th>
+    <td mat-cell *matCellDef="let car"> {{car.carType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="color">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+    <td mat-cell *matCellDef="let car"> {{car.color}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="plateNumber">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> PlateNumber </th>
+    <td mat-cell *matCellDef="let car"> {{car.plateNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="pricePerDay">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> PricePerDay </th>
+    <td mat-cell *matCellDef="let car"> {{car.pricePerDay}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="availabilityStatus">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> AvailabilityStatus </th>
+    <td mat-cell *matCellDef="let car"> {{car.availabilityStatus }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let car">
+      <button matTooltip="Edit" mat-icon-button color="primary" (click)="openEditDialog(car)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button matTooltip="Delete" mat-icon-button color="warn" (click)="openDeleteDialog(car.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Use the `mat-header-row` and `mat-row` directives to define the table headers and rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
 </table>
 <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>
-  

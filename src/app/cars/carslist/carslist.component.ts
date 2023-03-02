@@ -7,6 +7,7 @@ import { CarbookingService } from 'src/app/carbooking.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CarEditDialogComponent } from '../car-edit-dialog/car-edit-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.component';
+import { CarAddDialogComponent } from '../car-add-dialog/car-add-dialog.component';
 
 @Component({
   selector: 'app-carslist',
@@ -14,9 +15,9 @@ import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.co
   styleUrls: ['./carslist.component.css']
 })
 export class CarslistComponent {
-  cars: Car[]  = [];
+  cars: Car[] = [];
   //showEditForm: boolean = false;
-  selectedCar: Car| null = null;
+  selectedCar: Car | null = null;
 
   displayedColumns: string[] = ['id', 'name', 'model', 'makeYear', 'carType', 'color', 'plateNumber', 'pricePerDay', 'availabilityStatus', 'actions'];
   dataSource = new MatTableDataSource<Car>();
@@ -30,48 +31,48 @@ export class CarslistComponent {
     this.getCarsList();
   }
 
-  getCarsList(){
+  getCarsList() {
     this.carService.getCars().subscribe(data => {
       this.cars = data;
       this.cars.forEach(car => {
-      car.availabilityStatus = car.available ? "Available" : "Booked";
-     });
-     this.dataSource = new MatTableDataSource(this.cars);
-     this.dataSource.sort = this.sort;
-     this.dataSource.paginator=this.paginator;
-    // console.log(JSON.stringify(this.dataSource));
+        car.availabilityStatus = car.available ? "Available" : "Booked";
+      });
+      this.dataSource = new MatTableDataSource(this.cars);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+      // console.log(JSON.stringify(this.dataSource));
     });
   }
 
   deleteCar(id: number) {
     if (confirm(`Are you sure you want to delete the Car with id: ${id}?`)) {
-    this.carService.deleteCar(id).subscribe(() => {
-      this.cars = this.cars.filter(car => car.id !== id);
-    });
+      this.carService.deleteCar(id).subscribe(() => {
+        this.cars = this.cars.filter(car => car.id !== id);
+      });
     }
   }
 
- 
+
 
   editCar(car: Car) {
     this.selectedCar = Object.assign({}, car);
     //this.showEditForm = true;
   }
-  cancelEdit(car:Car) {
+  cancelEdit(car: Car) {
     //this.showEditForm = false;
-    this.selectedCar= null;
+    this.selectedCar = null;
   }
 
-  updateCar(car:Car) {
+  updateCar(car: Car) {
     if (confirm(`Are you sure you want to update the Car with id: ${car.id}?`)) {
-    this.carService.updateCar(car).subscribe(() => {
-      // TODO: Handle success and error cases
-      //this.showEditForm = false;
-      this.selectedCar= null;
-    });
+      this.carService.updateCar(car).subscribe(() => {
+        // TODO: Handle success and error cases
+        //this.showEditForm = false;
+        this.selectedCar = null;
+      });
+    }
   }
-  }
-  applyFilter(event:Event) {
+  applyFilter(event: Event) {
     console.log("inside filter");
     this.filterValue = (event.target as HTMLInputElement).value;
     //this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -80,13 +81,11 @@ export class CarslistComponent {
 
   openEditDialog(car: Car): void {
     const dialogRef = this.dialog.open(CarEditDialogComponent, {
-      width: '400px',
+      width: '350px',
       data: car
     });
-  
-    
     dialogRef.afterClosed().subscribe(result => {
-      if(dialogRef.componentInstance.carUpdated){
+      if (dialogRef.componentInstance.carUpdated) {
         this.getCarsList();
       }
       else if (result) {
@@ -100,12 +99,11 @@ export class CarslistComponent {
 
   openDeleteDialog(id: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '400px',
+      width: '450px',
       data: {
         message: `Are you sure you want to delete the car with id: ${id} ?`
       }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Call your service here to delete the car data
@@ -113,10 +111,23 @@ export class CarslistComponent {
           this.cars = this.cars.filter(car => car.id !== id);
           this.dataSource = new MatTableDataSource(this.cars);
           this.dataSource.sort = this.sort;
-          this.dataSource.paginator=this.paginator;
+          this.dataSource.paginator = this.paginator;
         });
       }
     });
   }
+
+  openAddDialog(): void {
+    const dialogRef = this.dialog.open(CarAddDialogComponent, {
+      width: '400px',
+      data: ''
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+      this.getCarsList();
+    });
+  }
+
 
 }

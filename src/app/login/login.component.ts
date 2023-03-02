@@ -31,7 +31,7 @@ export class LoginComponent {
       this.message = data;
      // window.localStorage.setItem("username",this.username);
       //window.localStorage.setItem("password",this.password);
-      
+      localStorage.setItem('customerdata', JSON.stringify(data));
       this.router.navigate(["/home"]);     
     },
     error=>console.log(error));

@@ -1,0 +1,114 @@
+<!-- <h2 mat-dialog-title>New Customer</h2> -->
+
+<!-- <mat-dialog-content>
+    <form>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Full Name" [(ngModel)]="customerdata.name" name="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" [(ngModel)]="customerdata.email" name="email">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Username" [(ngModel)]="customerdata.username" name="username">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Password" [(ngModel)]="customerdata.password" name="password">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" [(ngModel)]="customerdata.address" name="address">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Role</mat-label>
+            <mat-select placeholder="Role" [(ngModel)]="customerdata.role" name="role">
+              <mat-option value="ADMIN" >ADMIN</mat-option>
+              <mat-option value="USER" >USER</mat-option>
+              <mat-option value="OWNER" >OWNER</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button color="primary" (click)="onSave()">Save</button>
+</mat-dialog-actions> -->
+<section class="h-100 bg-dark">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-registration my-4">
+            <div class="row g-0">
+              <div class="col-xl-6 d-none d-xl-block">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                  alt="Sample photo" class="img-fluid"
+                  style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem;" />
+              </div>
+              <div class="col-xl-6">
+                <div class="card-body p-md-5 text-black">
+                    <p class="font-weight-bold text-black">{{msg}}</p>
+                  <h2 align="center" class="mb-5">Customer registration form</h2>
+  
+                  <div class="form-outline mb-4">
+                    
+                        <input type="text" id="form3Example1m" [(ngModel)]="customerdata.name" name="name" class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example1m">Full name</label>
+                      
+                    
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example97" [(ngModel)]="customerdata.email" name="email" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3Example97">Email</label>
+                  </div>
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example97" [(ngModel)]="customerdata.username" name="username" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3Example97">UserName</label>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="password" id="form3Example1m1" [(ngModel)]="customerdata.password" name="password" class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example1m1">Password</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <input type="password" id="form3Example1n1" [(ngModel)]="customerdata.confirmPassword" name="confirmPassword" class="form-control form-control-lg" />
+                        <label class="form-label" for="form3Example1n1">Confirm Password</label>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <input type="text" id="form3Example8"  [(ngModel)]="customerdata.address" name="address" class="form-control form-control-lg" />
+                    <label class="form-label" for="form3Example8">Address</label>
+                  </div>
+  
+                  <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">  
+                    <!-- <h4 class="mb-0">Role: </h4> -->
+                    <div class="form-check form-check-inline mb-0 me-4">
+                      <input class="radio" type="radio" [(ngModel)]="customerdata.role" name="role"   value="USER" />
+                      <label class="form-check-label" for="femaleGender">User</label>
+                    </div>
+  
+                    <div class="form-check form-check-inline mb-0 me-4">
+                      <input class="radio" type="radio" [(ngModel)]="customerdata.role" name="role"   value="OWNER" />
+                      <label class="form-check-label" for="maleGender">Owner</label>
+                    </div>
+                  </div>
+  
+                  <div class="d-flex justify-content-end pt-3">
+                    <!-- <button type="button" class="btn btn-light btn-lg">Reset all</button> -->
+                    <button type="button" class="btn btn-warning btn-lg ms-2" (click)="onSave()">Register</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

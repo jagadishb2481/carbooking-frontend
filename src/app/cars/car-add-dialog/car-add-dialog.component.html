@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Add New Car</h2>
+    <mat-dialog-content>
+      <form>       
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" [(ngModel)]="cardata.name" name="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Model</mat-label>
+          <input matInput placeholder="Model" [(ngModel)]="cardata.model" name="model">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>MakeYear</mat-label>
+          <input matInput placeholder="MakeYear" [(ngModel)]="cardata.makeYear" name="makeYear">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>CarType</mat-label>
+            <input matInput placeholder="CarType" [(ngModel)]="cardata.carType" name="carType">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Color</mat-label>
+            <input matInput placeholder="Color" [(ngModel)]="cardata.color" name="color">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>PlateNumber</mat-label>
+            <input matInput placeholder="PlateNumber" [(ngModel)]="cardata.plateNumber" name="plateNumber">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>PricePerDay</mat-label>
+            <input matInput placeholder="PricePerDay" [(ngModel)]="cardata.pricePerDay" name="pricePerDay">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>AvailabilityStatus</mat-label>
+            <mat-select [(ngModel)]="cardata.availabilityStatus" name="availabilityStatus">
+              <mat-option value="Available" >Available</mat-option>
+              <mat-option value="Booked" >Booked</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+      </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button color="btn-danger" (click)="onCancel()">Cancel</button>
+      <button mat-button color="btn-primary" (click)="onSave()">Save</button>
+    </mat-dialog-actions>
