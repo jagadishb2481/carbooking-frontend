@@ -16,11 +16,13 @@ export class CarAddDialogComponent {
   @Output() carAdded: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   cardata : Car = new Car();
+  fileName: string = '';
   onCancel(): void {
     this.dialogRef.close();
   }
 
   onSave(): void {
+   
     //console.log("updating car details of id:" + this.data.id);
     const dialogref = this.dialog.open(ConfirmDialogComponent, {
       width: '400px',
@@ -30,12 +32,23 @@ export class CarAddDialogComponent {
     });
     dialogref.afterClosed().subscribe(result => {
       if (result) {
+
         if (this.cardata.availabilityStatus == "Available") {
           this.cardata.available = true;
         } else {
           this.cardata.available = false;
         }
-        this.service.addCar(this.cardata).subscribe(() => {
+        const formData = new FormData();
+        formData.append('name', this.cardata.name);
+        formData.append('model', this.cardata.model);
+        formData.append('makeYear', this.cardata.makeYear);
+        formData.append('carType', this.cardata.carType);
+        formData.append('color', this.cardata.color);
+        formData.append('pricePerDay', String(this.cardata.pricePerDay));
+        formData.append('plateNumber', this.cardata.plateNumber);
+        formData.append('available', String(this.cardata.available));
+        formData.append('image', this.cardata.image);
+        this.service.addCar(formData).subscribe(() => {
           this.carAdded.emit(true);
           this.router.navigate(['/cars']);
         });
@@ -46,6 +59,35 @@ export class CarAddDialogComponent {
       }
       this.dialogRef.close(this.cardata);
     });
+  }
+
+ 
+  // onSubmit() {
+  //   const formData = new FormData();
+  //  // formData.append('id', this.cardata.id);
+  //   formData.append('name', this.cardata.name);
+  //   formData.append('model', this.cardata.model);
+  //   formData.append('makeyear', this.cardata.makeYear);
+  //   formData.append('carType', this.cardata.carType);
+  //   formData.append('color', this.cardata.color);
+  //   formData.append('name', this.cardata.name);
+  //   formData.append('model', this.cardata.model);
+  //   formData.append('makeyear', this.cardata.makeYear);
+  //   formData.append('image', this.cardata.image);
+  
+  //   this.http.post('/api/cars', formData).subscribe(
+  //     () => {
+  //       // Handle success
+  //     },
+  //     (error) => {
+  //       // Handle error
+  //     }
+  //   );
+  // }
+  
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.cardata.image = file;
   }
 
 }

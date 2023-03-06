@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +28,18 @@ import { CustomersListComponent } from './customers/customers-list/customers-lis
 import { CustomerEditDialogComponent } from './customers/customer-edit-dialog/customer-edit-dialog.component';
 import { CustomerAddDialogComponent } from './customers/customer-add-dialog/customer-add-dialog.component';
 import { RegisterComponent } from './register/register.component';
+import { BookCarsComponent } from './cars/book-cars/book-cars.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from '@angular-material-components/datetime-picker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ShowImageDialogComponent } from './show-image-dialog/show-image-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +54,9 @@ import { RegisterComponent } from './register/register.component';
     CustomersListComponent,
     CustomerEditDialogComponent,
     CustomerAddDialogComponent,
-    RegisterComponent
+    RegisterComponent,
+    BookCarsComponent,
+    ShowImageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,9 +71,19 @@ import { RegisterComponent } from './register/register.component';
     MatButtonModule,
     MatDialogModule ,
     MatSelectModule,
+    MatGridListModule,
     MatPseudoCheckboxModule,
     MatTooltipModule,
     MatRadioModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
     BrowserAnimationsModule
   ],
   providers: [],

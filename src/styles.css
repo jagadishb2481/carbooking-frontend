@@ -8,6 +8,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-size: 14px;
   width: 100%;
 }
+.parent {
+  width: 100%;  /* OR like 95% to make shadows visible */
+  height: 100%; /* OR like 95% to make shadows visible */
+}
+.mat-card {
+  width: inherit;
+  height: inherit;
+  box-sizing: border-box;
+}
 /* 
 
 /* Customize the table header appearance */

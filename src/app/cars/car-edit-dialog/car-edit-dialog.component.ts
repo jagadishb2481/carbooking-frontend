@@ -15,7 +15,7 @@ export class CarEditDialogComponent {
   constructor(public dialogRef: MatDialogRef<CarEditDialogComponent>, private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: Car, private service: CarbookingService, private router: Router) { }
   @Output() carUpdated: EventEmitter<boolean> = new EventEmitter<boolean>();
-
+  fileName: string = '';
   onCancel(): void {
     this.dialogRef.close();
   }
@@ -35,15 +35,35 @@ export class CarEditDialogComponent {
         } else {
           this.data.available = false;
         }
-        this.service.updateCar(this.data).subscribe(() => {
+        const formData = new FormData();
+        formData.append('name', this.data.name);
+        formData.append('model', this.data.model);
+        formData.append('makeYear', this.data.makeYear);
+        formData.append('carType', this.data.carType);
+        formData.append('color', this.data.color);
+        formData.append('pricePerDay', String(this.data.pricePerDay));
+        formData.append('plateNumber', this.data.plateNumber);
+        formData.append('available', String(this.data.available));
+        formData.append('image', this.data.image);
+       // formData.append('id', String(this.data.id));
+        this.service.updateCar(formData, this.data.id).subscribe(() => {
+          this.router.navigate(['/cars']);
           this.carUpdated.emit(true);
         });
       } else {
         //this.dialogRef.close(this.data);
-        this.carUpdated.emit(false);
         this.router.navigate(['/cars']);
+        this.carUpdated.emit(false);
       }
+      
+      
       this.dialogRef.close(this.data);
     });
   }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.data.image = file;
+  }
+
 }

@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Add New Car</h2>
     <mat-dialog-content>
-      <form>       
+      <form enctype="multipart/form-data">       
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput placeholder="Name" [(ngModel)]="cardata.name" name="name">
@@ -28,6 +28,12 @@
           <mat-form-field>
             <mat-label>PricePerDay</mat-label>
             <input matInput placeholder="PricePerDay" [(ngModel)]="cardata.pricePerDay" name="pricePerDay">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Image:</mat-label>
+            <input type="file" [(ngModel)]="cardata.image" (change)="onFileSelected($event)" name="image" >
+            <input type="text" matInput [value]="fileName" readonly>
+            <mat-icon matSuffix>attach_file</mat-icon>
           </mat-form-field>
           <mat-form-field>
             <mat-label>AvailabilityStatus</mat-label>

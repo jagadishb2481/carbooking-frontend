@@ -1,0 +1,49 @@
+<!-- cars.component.html -->
+<app-home></app-home>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location" placeholder="Enter location">
+    </mat-form-field>
+    
+    <!-- <mat-form-field>
+        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date & time" >
+        
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    
+        <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+    </mat-form-field> -->
+    <mat-form-field>
+        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date">
+        <mat-datetimepicker-toggle matSuffix ></mat-datetimepicker-toggle>
+        <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
+      </mat-form-field>
+      
+    
+    <mat-form-field> 
+      <mat-label>To Date</mat-label>
+      <input matInput [matDatepicker]="toDatepicker" formControlName="toDate" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #toDatepicker></mat-datepicker>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid">Submit</button>
+  </form>
+  
+<mat-grid-list cols="3" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let car of cars">
+        <div class="container">
+        <div >
+      <img src="{{car.image}}" alt="{{car.name}}"></div>
+      <div class="car-details">
+        <p class="car-name">{{car.name}}</p>
+        <p class="car-price">{{car.price | currency}}</p>
+        <button mat-raised-button color="primary" >Book Now</button>
+      </div>
+    </div>
+      <!-- <h3>{{car.name}}</h3>
+      <p>{{car.price | currency}}</p>
+      <button mat-raised-button color="primary" (click)="bookCar(car)">Book Now</button> -->
+    </mat-grid-tile>
+  </mat-grid-list>
+  

@@ -35,8 +35,8 @@ export class CarbookingService {
     return this.http.post<any>(this.carsUrl, car);
   }
 
-  updateCar(car: any): Observable<any> {
-    return this.http.put<any>(`${this.carsUrl}/${car.id}`, car);
+  updateCar(car: any, id:number): Observable<any> {
+       return this.http.put<any>(`${this.carsUrl}${id}`, car);
   }
 
   deleteCar(id: number): Observable<any> {

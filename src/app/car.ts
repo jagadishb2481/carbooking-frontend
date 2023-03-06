@@ -9,8 +9,10 @@ export class Car {
     pricePerDay:number;
     available:boolean;
     availabilityStatus:string;
-    color:String;
+    color:string;
     editing:boolean;
+    image:any;
+    imageurl:string;
     constructor() { 
       // Initialization inside the constructor
       this.id=0;
@@ -24,6 +26,7 @@ export class Car {
       this.color='';
       this.editing=false;
       this.availabilityStatus='';
+      this.imageurl='';
    }
 
   }
