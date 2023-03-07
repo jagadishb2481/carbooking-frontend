@@ -1,3 +1,4 @@
+import { SafeUrl } from "@angular/platform-browser";
 
 export class Car {
     id: number;
@@ -12,7 +13,7 @@ export class Car {
     color:string;
     editing:boolean;
     image:any;
-    imageurl:string;
+    imageurl:SafeUrl;
     constructor() { 
       // Initialization inside the constructor
       this.id=0;

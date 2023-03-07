@@ -40,9 +40,10 @@ export class CarslistComponent {
     )
     .subscribe(data => {
       this.cars = data;
-      
+      console.log("cars:"+JSON.stringify(this.cars));
       this.cars.forEach(car => {
          car.availabilityStatus = car.available ? "Available" : "Booked";
+         
       });
       this.dataSource = new MatTableDataSource(this.cars);
       this.dataSource.sort = this.sort;

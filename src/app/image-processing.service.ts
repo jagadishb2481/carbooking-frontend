@@ -23,8 +23,6 @@ export class ImageProcessingService {
     };
     car.image = finalFileHandle;
     return car;
-    
-
   }
 
   dataURItoBlob(picBytes:any, imageType:any){

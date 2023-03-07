@@ -10,7 +10,7 @@ import { FileHandle } from '../file-handle';
 })
 export class ShowImageDialogComponent {
 
-  constructor(     @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(){
     this.receiveImages();
