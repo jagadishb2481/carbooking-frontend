@@ -12,6 +12,7 @@ export class CarbookingService {
   //headers:HttpHeaders;
   private baseUrl = 'http://localhost:8081/';
   private carsUrl = 'http://localhost:8081/cars/';
+  private customersUrl = 'http://localhost:8081/api/customers/';
   constructor(private http:HttpClient, private router:Router) { }
 
   login(customer:Customer):Observable<any>{
@@ -34,12 +35,33 @@ export class CarbookingService {
     return this.http.post<any>(this.carsUrl, car);
   }
 
-  updateCar(car: any): Observable<any> {
-    return this.http.put<any>(`${this.carsUrl}/${car.id}`, car);
+  updateCar(car: any, id:number): Observable<any> {
+       return this.http.put<any>(`${this.carsUrl}${id}`, car);
   }
 
   deleteCar(id: number): Observable<any> {
     return this.http.delete<any>(`${this.carsUrl}/${id}`);
+  }
+
+// services of Customer
+  getCustomers(): Observable<any> {
+    return this.http.get<any>(this.customersUrl);
+  }
+
+  getCustomer(id: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}+cars'+/${id}`);
+  }
+
+  addCustomer(customer: any): Observable<any> {
+    return this.http.post<any>(this.customersUrl, customer);
+  }
+
+  updateCustomer(customer: any): Observable<any> {
+    return this.http.put<any>(`${this.customersUrl}/${customer.id}`, customer);
+  }
+
+  deleteCustomer(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.customersUrl}/${id}`);
   }
 
 

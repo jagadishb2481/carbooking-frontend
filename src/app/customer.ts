@@ -5,6 +5,7 @@ export class Customer {
     email: string;
     username:string;
     password:string;
+    confirmPassword:string;
     address: string
     phoneNumber:string;
     role:string;
@@ -18,6 +19,7 @@ export class Customer {
       this.name='';
       this.phoneNumber='';
       this.role='';
+      this.confirmPassword='';
    }
 
   }

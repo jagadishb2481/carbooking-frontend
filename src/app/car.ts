@@ -1,3 +1,4 @@
+import { SafeUrl } from "@angular/platform-browser";
 
 export class Car {
     id: number;
@@ -8,8 +9,11 @@ export class Car {
     plateNumber:string;
     pricePerDay:number;
     available:boolean;
-    color:String;
+    availabilityStatus:string;
+    color:string;
     editing:boolean;
+    image:any;
+    imageurl:SafeUrl;
     constructor() { 
       // Initialization inside the constructor
       this.id=0;
@@ -22,6 +26,8 @@ export class Car {
       this.available=true;
       this.color='';
       this.editing=false;
+      this.availabilityStatus='';
+      this.imageurl='';
    }
 
   }
