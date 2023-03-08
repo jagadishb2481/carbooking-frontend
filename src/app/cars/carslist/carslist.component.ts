@@ -11,6 +11,7 @@ import { CarAddDialogComponent } from '../car-add-dialog/car-add-dialog.componen
 import { ShowImageDialogComponent } from 'src/app/show-image-dialog/show-image-dialog.component';
 import { ImageProcessingService } from 'src/app/image-processing.service';
 import { map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carslist',
@@ -22,13 +23,13 @@ export class CarslistComponent {
   //showEditForm: boolean = false;
   selectedCar: Car | null = null;
 
-  displayedColumns: string[] = ['id', 'name', 'model', 'makeYear', 'carType', 'color', 'plateNumber', 'pricePerDay', 'availabilityStatus', 'image', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'model', 'makeYear', 'carType', 'color', 'plateNumber', 'pricePerDay', 'image', 'address', 'actions'];
   dataSource = new MatTableDataSource<Car>();
   filterValue: string = '';
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   pageSize = 5;
-  constructor(private carService: CarbookingService, private dialog: MatDialog, private imageProcessingService: ImageProcessingService) { }
+  constructor(private carService: CarbookingService, private dialog: MatDialog, private imageProcessingService: ImageProcessingService, private router:Router) { }
 
   ngOnInit() {
     this.getCarsList();
@@ -38,18 +39,20 @@ export class CarslistComponent {
     this.carService.getCars().pipe(
       map((x: Car[], i) => x.map((car: Car) => this.imageProcessingService.createImage(car)))
     )
-    .subscribe(data => {
-      this.cars = data;
-      console.log("cars:"+JSON.stringify(this.cars));
-      this.cars.forEach(car => {
-         car.availabilityStatus = car.available ? "Available" : "Booked";
-         
+      .subscribe(data => {
+        this.cars = data;
+        console.log("cars:" + JSON.stringify(this.cars));
+        this.cars.forEach(car => {
+          car.availabilityStatus = car.available ? "Available" : "Booked";
+          if (car.location) {
+            car.address = car.location.address + ", " + car.location.name + ", " + car.location.city + ", " + car.location.state + ", " + car.location.country + ", " + car.location.zipcode;
+          }
+        });
+        this.dataSource = new MatTableDataSource(this.cars);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        // console.log(JSON.stringify(this.dataSource));
       });
-      this.dataSource = new MatTableDataSource(this.cars);
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-      // console.log(JSON.stringify(this.dataSource));
-    });
   }
 
   deleteCar(id: number) {
@@ -71,19 +74,9 @@ export class CarslistComponent {
     this.selectedCar = null;
   }
 
-  // updateCar(car: Car) {
-  //   if (confirm(`Are you sure you want to update the Car with id: ${car.id}?`)) {
-  //     this.carService.updateCar(car).subscribe(() => {
-  //       // TODO: Handle success and error cases
-  //       //this.showEditForm = false;
-  //       this.selectedCar = null;
-  //     });
-  //   }
-  // }
   applyFilter(event: Event) {
     console.log("inside filter");
     this.filterValue = (event.target as HTMLInputElement).value;
-    //this.dataSource.filter = filterValue.trim().toLowerCase();
     this.dataSource.filter = this.filterValue.trim().toLowerCase();
   }
 
@@ -95,13 +88,14 @@ export class CarslistComponent {
     dialogRef.afterClosed().subscribe(result => {
       if (dialogRef.componentInstance.carUpdated) {
         this.getCarsList();
+        
       }
       else if (result) {
         const index = this.dataSource.data.indexOf(car);
         this.dataSource.data[index] = result;
         this.dataSource._updateChangeSubscription();
       }
-
+      this.router.navigate(['/cars']);
     });
   }
 
@@ -154,13 +148,13 @@ export class CarslistComponent {
   //   });
   // }
 
-  showImage(car:Car){
+  showImage(car: Car) {
     const dialogRef = this.dialog.open(ShowImageDialogComponent, {
       width: '1200px',
-      height:'800px',
-      data:{images: [car.image]}
+      height: '800px',
+      data: { images: [car.image] }
     });
-    
+
   }
 
 }

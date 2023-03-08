@@ -1,0 +1,62 @@
+
+<a class="btn btn-primary active" role="button" (click)="openAddDialog()">Add Location</a>
+<form>
+<mat-form-field>
+  <mat-label>Search</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+</mat-form-field>
+</form>
+<table mat-table class="table table-hover" matSort [dataSource]="dataSource">
+  <!-- Define the table columns -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+    <td mat-cell *matCellDef="let location"> {{location.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let location"> {{location.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+    <td mat-cell *matCellDef="let location"> {{location.address}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="city">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
+    <td mat-cell *matCellDef="let location"> {{location.city}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> State </th>
+    <td mat-cell *matCellDef="let location"> {{location.state}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+    <td mat-cell *matCellDef="let location"> {{location.country}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="zipcode">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> ZipCode </th>
+    <td mat-cell *matCellDef="let location"> {{location.zipcode}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let location">
+      <button matTooltip="Edit" mat-icon-button color="primary" (click)="openEditDialog(location)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button matTooltip="Delete" mat-icon-button color="warn" (click)="openDeleteDialog(location.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Use the `mat-header-row` and `mat-row` directives to define the table headers and rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>

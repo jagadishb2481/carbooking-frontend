@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Edit Location</h2>
+<mat-dialog-content>
+    <form>
+        <mat-form-field>
+            <mat-label>Location Name</mat-label>
+            <input matInput placeholder="Location Name" [(ngModel)]="data.name" name="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <input matInput placeholder="Address" [(ngModel)]="data.address" name="address">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>City</mat-label>
+            <input matInput placeholder="City" [(ngModel)]="data.city" name="city">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>State</mat-label>
+            <input matInput placeholder="State" [(ngModel)]="data.state" name="state">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Country</mat-label>
+            <input matInput placeholder="Country" [(ngModel)]="data.country" name="country">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>ZipCode</mat-label>
+            <input matInput placeholder="ZipCode" [(ngModel)]="data.zipcode" name="zipcode">
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button color="primary" (click)="onUpdate()">Update</button>
+</mat-dialog-actions>

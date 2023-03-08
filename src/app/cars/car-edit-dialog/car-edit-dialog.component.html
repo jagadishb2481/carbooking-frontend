@@ -36,17 +36,25 @@
             <input type="text" matInput [value]="fileName" readonly>
             <mat-icon matSuffix>attach_file</mat-icon>
           </mat-form-field>
+          <mat-form-field>
+            <input type="text" placeholder="Location" aria-label="Location" matInput (input)="searchLocations($event.target)" [(ngModel)]="data.location" name="location" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayLocation">
+              <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+                {{ location.address }}, {{ location.name }}, {{ location.zipcode }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
           <!-- <mat-form-field>
             <mat-label>AvailabilityStatus</mat-label>
             <input matInput placeholder="AvailabilityStatus" [(ngModel)]="data.availabilityStatus" name="availabilityStatus">
           </mat-form-field> -->
-          <mat-form-field>
+          <!-- <mat-form-field>
             <mat-label>AvailabilityStatus</mat-label>
             <mat-select [(ngModel)]="data.availabilityStatus" name="availabilityStatus">
               <mat-option value="Available" >Available</mat-option>
               <mat-option value="Booked" >Booked</mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> -->
           
       </form>
     </mat-dialog-content>

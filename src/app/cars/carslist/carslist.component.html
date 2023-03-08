@@ -61,7 +61,6 @@
         </tbody>
     </table>
 </div> -->
-<app-home></app-home>
 <a class="btn btn-primary active" role="button" (click)="openAddDialog()">Add Car</a>
 <mat-form-field>
   <mat-label>Search</mat-label>
@@ -108,10 +107,10 @@
     <td mat-cell *matCellDef="let car"> {{car.pricePerDay}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="availabilityStatus">
+  <!-- <ng-container matColumnDef="availabilityStatus">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> AvailabilityStatus </th>
     <td mat-cell *matCellDef="let car"> {{car.availabilityStatus }} </td>
-  </ng-container>
+  </ng-container> -->
 
   <ng-container matColumnDef="image">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Image </th>
@@ -120,6 +119,12 @@
       <button matTooltip={{car.name}} mat-icon-button color="primary" (click)="showImage(car)">
       <mat-icon>images</mat-icon>
     </button> </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="address">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Location </th>
+    <td mat-cell *matCellDef="let car"> {{car.address}}  </td>
+    <!-- {{car.location.address}}, {{car.location.name}}, <br>{{car.location.city}}, {{car.location.state}},<br>{{car.location.country}}, {{car.location.zipcode}} -->
   </ng-container>
 
   <ng-container matColumnDef="actions">

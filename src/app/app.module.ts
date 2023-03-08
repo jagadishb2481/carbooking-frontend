@@ -40,6 +40,11 @@ import {
 } from '@angular-material-components/datetime-picker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ShowImageDialogComponent } from './show-image-dialog/show-image-dialog.component';
+import { BookNowComponent } from './bookings/book-now/book-now.component';
+import { LocationListComponent } from './locations/location-list/location-list.component';
+import { LocationAddDialogComponent } from './locations/location-add-dialog/location-add-dialog.component';
+import { LocationEditDialogComponent } from './locations/location-edit-dialog/location-edit-dialog.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -56,7 +61,11 @@ import { ShowImageDialogComponent } from './show-image-dialog/show-image-dialog.
     CustomerAddDialogComponent,
     RegisterComponent,
     BookCarsComponent,
-    ShowImageDialogComponent
+    ShowImageDialogComponent,
+    BookNowComponent,
+    LocationListComponent,
+    LocationAddDialogComponent,
+    LocationEditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +93,7 @@ import { ShowImageDialogComponent } from './show-image-dialog/show-image-dialog.
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatAutocompleteModule,
     BrowserAnimationsModule
   ],
   providers: [],

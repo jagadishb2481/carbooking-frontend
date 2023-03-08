@@ -13,6 +13,9 @@ export class CarbookingService {
   private baseUrl = 'http://localhost:8081/';
   private carsUrl = 'http://localhost:8081/cars/';
   private customersUrl = 'http://localhost:8081/api/customers/';
+  private locationsUrl = 'http://localhost:8081/api/locations/';
+  private rentalUrl = 'http://localhost:8081/api/rental/';
+  
   constructor(private http:HttpClient, private router:Router) { }
 
   login(customer:Customer):Observable<any>{
@@ -64,5 +67,29 @@ export class CarbookingService {
     return this.http.delete<any>(`${this.customersUrl}/${id}`);
   }
 
+  // services of Location
+  getAllLocations(): Observable<any> {
+    return this.http.get<any>(this.locationsUrl);
+  }
+
+  getLocation(id: number): Observable<any> {
+    return this.http.get<any>(`${this.locationsUrl}${id}`);
+  }
+
+  addLocation(location: any): Observable<any> {
+    return this.http.post<any>(this.locationsUrl, location);
+  }
+
+  updateLocation(location: any): Observable<any> {
+    return this.http.put<any>(`${this.locationsUrl}${location.id}`, location);
+  }
+
+  deleteLocation(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.customersUrl}/${id}`);
+  }
+
+  getAvailableCars(request:any){
+    return this.http.post<any>(`${this.rentalUrl}availableCars`, request);
+  }
 
 }

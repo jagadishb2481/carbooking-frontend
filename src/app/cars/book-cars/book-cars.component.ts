@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map } from 'rxjs';
+import { Router } from '@angular/router';
+import { map, Observable, of } from 'rxjs';
 import { Car } from 'src/app/car';
 import { CarbookingService } from 'src/app/carbooking.service';
 import { ImageProcessingService } from 'src/app/image-processing.service';
+import { Location } from 'src/app/locations/location';
 
 @Component({
   selector: 'app-book-cars',
@@ -11,11 +13,13 @@ import { ImageProcessingService } from 'src/app/image-processing.service';
   styleUrls: ['./book-cars.component.css']
 })
 export class BookCarsComponent {
-  url:string='';
-  cars:Car[] = [];
+  url: string = '';
+  cars: Car[] = [];
+  locations: Location[] = [];
   myForm: FormGroup;
-
-  constructor(private fb: FormBuilder, private carService: CarbookingService, private imageProcessingService: ImageProcessingService) {
+  filteredLocations: Observable<Location[]> = of([]);
+  filterValue = '';
+  constructor(private fb: FormBuilder, private service: CarbookingService, private imageProcessingService: ImageProcessingService, private router: Router) {
     this.myForm = this.fb.group({
       location: ['', Validators.required],
       fromDate: ['', Validators.required],
@@ -24,42 +28,81 @@ export class BookCarsComponent {
   }
   ngOnInit() {
     this.getCarsList();
+    this.getAllLocations();
+  }
+
+  getAllLocations() {
+    this.service.getAllLocations().subscribe(data => {
+      this.locations = data;
+      this.filteredLocations = of(this.locations);
+    });
+  }
+
+  searchLocations(event: any) {
+    this.filteredLocations = of(this.filterLocations(event.value));
+  }
+
+  filterLocations(value: string): Location[] {
+    this.filterValue = value.toLowerCase();
+    return this.locations.filter(location => location.name.toLowerCase().includes(this.filterValue) ||
+      location.address.toLowerCase().includes(this.filterValue) ||
+      location.city.toLowerCase().includes(this.filterValue) ||
+      location.country.toLowerCase().includes(this.filterValue) ||
+      location.zipcode.toLowerCase().includes(this.filterValue));
+  }
+
+  displayLocation(location: Location): string {
+    return location && location.name ? location.address + "," + location.name + "," + location.zipcode : '';
   }
 
   getCarsList() {
-    this.carService.getCars().pipe(
+    this.service.getCars().pipe(
       map((x: Car[], i) => x.map((car: Car) => this.imageProcessingService.createImage(car)))
     )
-    .subscribe(data => {
-      this.cars = data;
-      console.log("cars array:"+JSON.stringify(this.cars));
-      this.cars.forEach(car => {
-         car.availabilityStatus = car.available ? "Available" : "Booked";
-         car.imageurl = car.image.url;
+      .subscribe(data => {
+        this.cars = data;
+        console.log("cars array:" + JSON.stringify(this.cars));
+        this.cars.forEach(car => {
+          car.availabilityStatus = car.available ? "Available" : "Booked";
+          car.imageurl = car.image.url;
+        });
       });
-      // this.dataSource = new MatTableDataSource(this.cars);
-      // this.dataSource.sort = this.sort;
-      // this.dataSource.paginator = this.paginator;
-      // console.log(JSON.stringify(this.dataSource));
-    });
   }
- 
-  
+
+
 
   onSubmit() {
-    console.log(this.myForm.value);
-  }
-
-  bookCar(car:any) {
-    // Add your booking logic here
-  }
-  getImageUrl(image: string) {
-    if (image) {
-      return 'data:image/jpg;base64,' + image;
-    } else {
-      return '';
-    }
-  }
-
+    //if(this.myForm.location)
+    if(this.myForm.valid){
+      console.log(this.myForm.get('location'));
+      const request = {
+        location: this.myForm.get('location')?.value,
+        fromDate: this.myForm.get('fromDate')?.value,
+        toDate: this.myForm.get('toDate')?.value,
+      };
   
+      console.log("request : "+ JSON.stringify(request));
+      this.service.getAvailableCars(request).pipe(
+        map((x: Car[], i) => x.map((car: Car) => this.imageProcessingService.createImage(car)))
+      )
+        .subscribe(data => {
+          this.cars = data;
+          console.log("cars array:" + JSON.stringify(this.cars));
+          this.cars.forEach(car => {
+            //car.availabilityStatus = car.available ? "Available" : "Booked";
+            car.imageurl = car.image.url;
+          });
+        });
+    }
+
+
+  }
+
+  onSelect(car: Car) {
+
+    this.router.navigate(['/bookingDetails']);
+
+  }
+
+
 }

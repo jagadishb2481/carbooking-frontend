@@ -31,7 +31,7 @@ export class CustomerEditDialogComponent {
   }
 
   onUpdate(): void {
-    console.log("updating car details of id:" + this.data.id);
+    console.log("updating cusomter details of id:" + this.data.id);
     const dialogref = this.dialog.open(ConfirmDialogComponent, {
       width: '450px',
       data: {
@@ -44,7 +44,6 @@ export class CustomerEditDialogComponent {
           this.customerUpdated.emit(true);
         });
       } else {
-        //this.dialogRef.close(this.data);
         this.customerUpdated.emit(false);
         this.router.navigate(['/customers']);
       }

@@ -32,7 +32,7 @@ export class LoginComponent {
      // window.localStorage.setItem("username",this.username);
       //window.localStorage.setItem("password",this.password);
       localStorage.setItem('customerdata', JSON.stringify(data));
-      this.router.navigate(["/home"]);     
+      this.router.navigate(["/bookingHome"]);     
     },
     error=>console.log(error));
   }

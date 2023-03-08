@@ -1,40 +1,58 @@
 <!-- cars.component.html -->
-<app-home></app-home>
+
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <mat-form-field>
-    <mat-label>Location</mat-label>
-    <input matInput formControlName="location" placeholder="Enter location">
-  </mat-form-field>
+  <mat-dialog-content>
+    <!-- <mat-form-field>
+      <mat-label>Rental Location</mat-label>
+      <input matInput formControlName="location" placeholder="Enter location">
+    </mat-form-field> -->
 
-  <mat-form-field>
-    <mat-label>From Date</mat-label>
-    <input matInput [matDatepicker]="fromDatepicker" formControlName="fromDate" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
-    <mat-datepicker #fromDatepicker></mat-datepicker>
-  </mat-form-field>
+    <mat-form-field>
+      <input type="text" placeholder="Location" aria-label="Location" matInput (input)="searchLocations($event.target)"  formControlName="location" name="location" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayLocation">
+        <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
+          {{ location.address }}, {{ location.name }}, {{ location.city }},{{ location.state }}, {{ location.zipcode }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>To Date</mat-label>
-    <input matInput [matDatepicker]="toDatepicker" formControlName="toDate" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
-    <mat-datepicker #toDatepicker></mat-datepicker>
-  </mat-form-field>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid">Submit</button>
+    <mat-form-field>
+      <mat-label>From Date</mat-label>
+      <input matInput [matDatepicker]="fromDatepicker" formControlName="fromDate" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #fromDatepicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>To Date</mat-label>
+      <input matInput [matDatepicker]="toDatepicker" formControlName="toDate" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
+      <mat-datepicker #toDatepicker></mat-datepicker>
+    </mat-form-field>
+    
+    <a class="btn btn-primary active" role="button" [ngClass]="{ 'disabled': !myForm.valid }" (click)="onSubmit()">Search</a> 
+  </mat-dialog-content>
+
+
+  &nbsp;
+  <!-- <input  mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" > -->
+  
+    
+  
+
 </form>
+
 
 <mat-grid-list cols="3" rowHeight="1:1" width="100%">
   <mat-grid-tile *ngFor="let car of cars">
     <div class="container">
       <div>
         <img [src]="car.imageurl" mat-grid-tile fit="true" style="width: 100%">
-      <!-- </div>
-      <div class="car-details"> -->
         <p class="car-name">{{car.name }} {{car.model }} {{car.makeYear }}</p>
         <p class="car-price">{{car.pricePerDay | currency}} Per Day</p>
-        
       </div>
-      <div><button mat-raised-button color="primary">Book Now</button></div>
+      <div><button mat-raised-button color="primary" (click)="onSelect(car)">Select</button></div>
     </div>
   </mat-grid-tile>
 </mat-grid-list>
