@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDatepickerInput } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 import { map, Observable, of } from 'rxjs';
 import { Car } from 'src/app/car';
@@ -19,13 +21,24 @@ export class BookCarsComponent {
   myForm: FormGroup;
   filteredLocations: Observable<Location[]> = of([]);
   filterValue = '';
+  msg = '';
+  //@ViewChild('fromDatepicker') fromDatepicker:  MatDatepickerInput<Date> = new MatDatepickerInput();
+  minDate = new Date();
   constructor(private fb: FormBuilder, private service: CarbookingService, private imageProcessingService: ImageProcessingService, private router: Router) {
     this.myForm = this.fb.group({
       location: ['', Validators.required],
       fromDate: ['', Validators.required],
       toDate: ['', Validators.required]
     });
+    
+    this.myForm.valueChanges.subscribe(() => {
+      if (this.myForm.valid) {
+        this.onSubmit();
+      }
+    });
+
   }
+
   ngOnInit() {
     this.getCarsList();
     this.getAllLocations();
@@ -72,7 +85,7 @@ export class BookCarsComponent {
 
 
   onSubmit() {
-    //if(this.myForm.location)
+    console.log("inside onsubmit");
     if(this.myForm.valid){
       console.log(this.myForm.get('location'));
       const request = {
@@ -100,7 +113,12 @@ export class BookCarsComponent {
 
   onSelect(car: Car) {
 
-    this.router.navigate(['/bookingDetails']);
+    if(this.myForm.valid){
+      this.router.navigate(['/bookingDetails']);
+    }else{
+      this.msg = "Please enter the values in required fields Location, From Date and To Date "
+    }
+    
 
   }
 

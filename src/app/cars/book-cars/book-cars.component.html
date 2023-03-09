@@ -1,14 +1,15 @@
 <!-- cars.component.html -->
 
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="myForm" (ngSubmit)="myForm.valid && onSubmit()">
+  <div *ngIf="msg!=''" style="color: red;">{{msg}}</div>
   <mat-dialog-content>
     <!-- <mat-form-field>
       <mat-label>Rental Location</mat-label>
       <input matInput formControlName="location" placeholder="Enter location">
     </mat-form-field> -->
-
+    
     <mat-form-field>
-      <input type="text" placeholder="Location" aria-label="Location" matInput (input)="searchLocations($event.target)"  formControlName="location" name="location" [matAutocomplete]="auto">
+      <input type="text" placeholder="Location" aria-label="Location"  matInput (input)="searchLocations($event.target)"  formControlName="location" name="location" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayLocation">
         <mat-option *ngFor="let location of filteredLocations | async" [value]="location">
           {{ location.address }}, {{ location.name }}, {{ location.city }},{{ location.state }}, {{ location.zipcode }}
@@ -19,17 +20,19 @@
 
     <mat-form-field>
       <mat-label>From Date</mat-label>
-      <input matInput [matDatepicker]="fromDatepicker" formControlName="fromDate" placeholder="Choose a date">
-      <mat-datepicker-toggle matSuffix [for]="fromDatepicker"></mat-datepicker-toggle>
-      <mat-datepicker #fromDatepicker></mat-datepicker>
+      <input matInput [matDatepicker]="fromDatepicker" [min]="minDate"  formControlName="fromDate" placeholder="Choose a date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="fromDatepicker" ></mat-datepicker-toggle>
+      <mat-datepicker #fromDatepicker ></mat-datepicker>      
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>To Date</mat-label>
-      <input matInput [matDatepicker]="toDatepicker" formControlName="toDate" placeholder="Choose a date">
-      <mat-datepicker-toggle matSuffix [for]="toDatepicker"></mat-datepicker-toggle>
-      <mat-datepicker #toDatepicker></mat-datepicker>
-    </mat-form-field>
+      <input matInput [matDatepicker]="toDatepicker" [min]="minDate"  formControlName="toDate" placeholder="Choose a date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="toDatepicker" ></mat-datepicker-toggle>
+      <mat-datepicker #toDatepicker ></mat-datepicker>
+   </mat-form-field>
     
     <a class="btn btn-primary active" role="button" [ngClass]="{ 'disabled': !myForm.valid }" (click)="onSubmit()">Search</a> 
   </mat-dialog-content>
