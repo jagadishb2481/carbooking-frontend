@@ -11,3 +11,18 @@
     height: 100%;
     }
     }
+
+    .login-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: top;
+        height: 100vh; /* Set the height of the container to fill the viewport */
+      }
+      
+      
+      
+      
+      
+      
+      

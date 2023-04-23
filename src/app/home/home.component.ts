@@ -1,5 +1,7 @@
 import { NonNullAssert } from '@angular/compiler';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { Customer } from '../customer';
 
 @Component({
@@ -10,7 +12,10 @@ import { Customer } from '../customer';
 export class HomeComponent {
    customer : Customer = new Customer();
   role = '';
+  isAuthenticated = false;
+  constructor(private authService:AuthService, private router:Router) { }
   ngOnInit() {
+    this.isAuthenticated = this.authService.isLoggedIn();
     let customerData = localStorage.getItem('customerdata');
     console.log("customerData:" + JSON.stringify(customerData));
     if (customerData) {
@@ -18,5 +23,10 @@ export class HomeComponent {
       this.role = this.customer.role;
       console.log("role:" + this.role)
     }
+  }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['\login']);
   }
 }

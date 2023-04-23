@@ -12,7 +12,7 @@ import { MatButtonModule, MatButton } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatPseudoCheckboxModule } from '@angular/material/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
@@ -45,6 +45,7 @@ import { LocationListComponent } from './locations/location-list/location-list.c
 import { LocationAddDialogComponent } from './locations/location-add-dialog/location-add-dialog.component';
 import { LocationEditDialogComponent } from './locations/location-edit-dialog/location-edit-dialog.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AuthInterceptor } from './auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatAutocompleteModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -67,7 +67,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-      <li *ngIf="role === 'ADMIN'" class="nav-item dropdown">
+      <li  class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
           Manage
@@ -105,7 +105,7 @@
     </ul>
     <ul class="navbar-nav navbar-right">
       <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
+        <a class="nav-link" (click)="logout()">Logout</a>
       </li>
     </ul>
   </div>

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './auth.guard';
 import { BookNowComponent } from './bookings/book-now/book-now.component';
 import { AddcarComponent } from './cars/addcar/addcar.component';
 import { BookCarsComponent } from './cars/book-cars/book-cars.component';
@@ -15,12 +16,12 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
-  {path:'cars',component:CarslistComponent},
-  {path:'customers',component:CustomersListComponent},
-  {path:'locations',component:LocationListComponent},
+  {path:'cars',component:CarslistComponent, canActivate: [AuthGuard]},
+  {path:'customers',component:CustomersListComponent, canActivate: [AuthGuard]},
+  {path:'locations',component:LocationListComponent, canActivate: [AuthGuard]},
   {path:'register',component:RegisterComponent},
-  {path:'bookingHome',component:BookCarsComponent},
-  {path:'bookingDetails',component:BookNowComponent}
+  {path:'bookingHome',component:BookCarsComponent, canActivate: [AuthGuard]},
+  {path:'bookingDetails',component:BookNowComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

@@ -27,11 +27,11 @@ export class CarbookingService {
    }
 
    getCars(): Observable<any> {
-    return this.http.get<any>(this.baseUrl+'/cars');
+    return this.http.get<any>(this.carsUrl);
   }
 
   getCar(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}+cars'+/${id}`);
+    return this.http.get<any>(`${this.carsUrl}${id}`);
   }
 
   addCar(car: any): Observable<any> {
