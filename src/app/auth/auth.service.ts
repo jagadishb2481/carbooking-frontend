@@ -1,14 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, BehaviorSubject  } from 'rxjs';
+import { Customer } from '../customer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
    public isAuthenticated = new BehaviorSubject<boolean>(false);
- 
-  constructor(private http: HttpClient) {}
+   public customerObservable = new BehaviorSubject<Customer>(new Customer());
+   //public customer: Customer = new Customer();
+  constructor(private http: HttpClient) {
+    
+  }
 
   login(username: string, password: string): Observable<boolean> {
     const authRequest = {
@@ -21,6 +25,8 @@ export class AuthService {
         const token =  response.jwtToken;
         if (token) {
           localStorage.setItem('token', token);
+          this.isAuthenticated.next(true);
+          this.customerObservable.next(this.getCustomer(token)) ;
           return true;
         } else {
           return false;
@@ -44,7 +50,18 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem('token');//JSON.parse(localStorage.getItem('token') || '{}');
-   
+    
      return token!=null;
   }
+
+  public getCustomer(token: string): any{
+    if (!token) {
+      return null;
+    }
+    console.log(JSON.stringify(JSON.parse(atob(token.split('.')[0]))));
+    console.log(JSON.stringify(JSON.parse(atob(token.split('.')[1]))));
+   // console.log(JSON.stringify(JSON.parse(atob(token.split('.')[2]))));
+    return JSON.parse(atob(token.split('.')[1])) as Customer;
+  }
+
 }

@@ -66,6 +66,7 @@
   <mat-label>Search</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
 </mat-form-field>
+<div class="table-container mat-elevation-z8">
 <table mat-table class="table table-hover" matSort [dataSource]="dataSource">
   <!-- Define the table columns -->
   <ng-container matColumnDef="id">
@@ -144,4 +145,5 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+</div>
 <mat-paginator [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 25, 50]" showFirstLastButtons></mat-paginator>

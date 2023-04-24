@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth/auth.service';
 import { map, Observable, BehaviorSubject  } from 'rxjs';
 
 
@@ -11,7 +11,7 @@ import { map, Observable, BehaviorSubject  } from 'rxjs';
 export class AppComponent {
   title = 'carbooking-frontend';
   public isAuthenticated = false;
-  constructor(private authService:AuthService) {}
+  constructor(public authService:AuthService) {}
 
   ngOnInit() {
     this.isAuthenticated = this.authService.isLoggedIn();

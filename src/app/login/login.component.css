@@ -19,7 +19,32 @@
         justify-content: top;
         height: 100vh; /* Set the height of the container to fill the viewport */
       }
+      .container {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .login-btn {
+        background-color: #2187f3;
+        color: white;
+      }
       
+      .register-btn {
+        background-color: #da71ab;
+        color: white;
+      }
+      .register-msg {
+        font-size: 18px;
+        color: #757575;
+        margin-top: 8px;
+        text-align: center;
+      }
+      
+      .register-msg a {
+        color: #b90a0a;
+        /* text-decoration: none; */
+      }
       
       
       

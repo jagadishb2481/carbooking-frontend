@@ -74,7 +74,7 @@ export class BookCarsComponent {
     )
       .subscribe(data => {
         this.cars = data;
-        console.log("cars array:" + JSON.stringify(this.cars));
+       // console.log("cars array:" + JSON.stringify(this.cars));
         this.cars.forEach(car => {
           car.availabilityStatus = car.available ? "Available" : "Booked";
           car.imageurl = car.image.url;

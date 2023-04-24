@@ -70,42 +70,43 @@
       <li  class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
-          Manage
+          Admin
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" href="/cars">Cars</a></li>
-          <li><a class="dropdown-item" href="/customers">Customers</a></li>
-          <li><a class="dropdown-item" href="/bookings">Bookings</a></li>
-          <li><a class="dropdown-item" href="/locations">Locations</a></li>
+          <li><a class="dropdown-item" routerLink="/cars">Cars</a></li>
+          <li><a class="dropdown-item" routerLink="/customers">Customers</a></li>
+          <li><a class="dropdown-item" routerLink="/bookings">Bookings</a></li>
+          <li><a class="dropdown-item" routerLink="/locations">Locations</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
-          Self
+          Customer
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li><a class="dropdown-item" href="/bookingHome">Booking Home</a></li>
-          <li *ngIf="role === 'OWNER'"><a class="dropdown-item" href="/myCars">My Cars</a></li>
-          <li><a class="dropdown-item" href="/profile">My Profile</a></li>
-          <li><a class="dropdown-item" href="/bookings">My Bookings</a></li>
+          <li><a class="dropdown-item" routerLink="/bookingHome">Booking Home</a></li>
+          <li *ngIf="role === 'OWNER'"><a class="dropdown-item" routerLink="/myCars">My Cars</a></li>
+          <li><a class="dropdown-item" routerLink="/profile">My Profile</a></li>
+          <li><a class="dropdown-item" routerLink="/bookings">My Bookings</a></li>
         </ul>
       </li>
     </ul>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" routerLink="#">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" routerLink="#">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
+        <a class="nav-link" routerLink="#">Contact Us</a>
       </li>
     </ul>
     <ul class="navbar-nav navbar-right">
+      
       <li class="nav-item">
-        <a class="nav-link" (click)="logout()">Logout</a>
+        <button *ngIf="authService.isAuthenticated | async" class="nav-btn" (click)="logout()">Logout</button>
       </li>
     </ul>
   </div>

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './auth/auth.guard';
+import { RoleGuard } from './auth/role.guard';
+
 import { BookNowComponent } from './bookings/book-now/book-now.component';
 import { AddcarComponent } from './cars/addcar/addcar.component';
 import { BookCarsComponent } from './cars/book-cars/book-cars.component';
@@ -16,9 +18,9 @@ import { RegisterComponent } from './register/register.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path:'login',component:LoginComponent},
-  {path:'cars',component:CarslistComponent, canActivate: [AuthGuard]},
-  {path:'customers',component:CustomersListComponent, canActivate: [AuthGuard]},
-  {path:'locations',component:LocationListComponent, canActivate: [AuthGuard]},
+  {path:'cars',component:CarslistComponent, canActivate: [AuthGuard, RoleGuard], data:{role:'ADMIN'}},
+  {path:'customers',component:CustomersListComponent, canActivate: [AuthGuard, RoleGuard], data:{role:'ADMIN'}},
+  {path:'locations',component:LocationListComponent, canActivate: [AuthGuard, RoleGuard], data:{role:'ADMIN'}},
   {path:'register',component:RegisterComponent},
   {path:'bookingHome',component:BookCarsComponent, canActivate: [AuthGuard]},
   {path:'bookingDetails',component:BookNowComponent, canActivate: [AuthGuard]}

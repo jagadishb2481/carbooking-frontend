@@ -60,11 +60,11 @@ export class CarbookingService {
   }
 
   updateCustomer(customer: any): Observable<any> {
-    return this.http.put<any>(`${this.customersUrl}/${customer.id}`, customer);
+    return this.http.put<any>(`${this.customersUrl}${customer.id}`, customer);
   }
 
   deleteCustomer(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.customersUrl}/${id}`);
+    return this.http.delete<any>(`${this.customersUrl}${id}`);
   }
 
   // services of Location

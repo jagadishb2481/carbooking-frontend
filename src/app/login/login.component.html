@@ -22,7 +22,7 @@
 
 
 <mat-card class="login-card">
-  <mat-card-title>Login to Car Rental App</mat-card-title>
+  <mat-card-title>Login</mat-card-title>
 <mat-card-content>
 <form  (ngSubmit)="doLogin()">
 
@@ -34,8 +34,10 @@
     <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="password" >
   </mat-form-field>
 <p *ngIf="error" class="error">  {{ error }}</p>
-<div class="button">
-  <button type="submit" mat-button>Login</button>
+<div class="container">
+  <button class="login-btn" type="submit" mat-button>Login</button>
+  <!-- <a class="nav-btn" routerLink="/register"  class="register-btn" mat-button>Register</a> -->
+  <p class="register-msg">New customer? <a routerLink="/register">Register here</a></p>
 </div>
 
 </form>
