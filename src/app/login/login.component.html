@@ -1,90 +1,63 @@
 <!-- 
-<div align="center" class="background-wrap">
-    <div class="background"></div>
-
-  <form id="accesspanel" >
-    <h1 class="card-header">Login Page</h1>
-    <div class="inset">
-      <p>
-        <input type="text" name="username" [(ngModel)]="customer.username" id="username" placeholder="username">
-      </p>
-      <p>
-        <input type="password" name="password" [(ngModel)]="customer.password" id="password" placeholder="password">
-      </p>
-     <p>
-      <input type="submit" name="Login" id="go" value="Login" (click)="doLogin()">
-      &nbsp;
-      <a routerLink="register" class="btn btn-primary active" role="button" routerLinkActive="active">New User</a>
-        </p>
-    </div>
-  </form>
-</div> -->
-
-
 <mat-card class="login-card">
   <mat-card-title>Login</mat-card-title>
 <mat-card-content>
 <form  (ngSubmit)="doLogin()">
-
+ <div >
   <mat-form-field>
     <input type="text" matInput placeholder="Username" name="username" [(ngModel)]="username" >
   </mat-form-field>
 
   <mat-form-field>
     <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="password" >
-  </mat-form-field>
-<p *ngIf="error" class="error">  {{ error }}</p>
-<div class="container">
-  <button class="login-btn" type="submit" mat-button>Login</button>
-  <!-- <a class="nav-btn" routerLink="/register"  class="register-btn" mat-button>Register</a> -->
-  <p class="register-msg">New customer? <a routerLink="/register">Register here</a></p>
-</div>
+  </mat-form-field> -->
+<!-- <p *ngIf="error" class="error">  {{ error }}</p> -->
+
+  <!-- <button class="login-btn" type="submit" mat-button>Login</button>
+  <p class="register-msg">New customer? <a routerLink="/register">Register here</a></p> -->
+  <!-- <button type="submit" mat-button >Login</button>
+   <div *ngIf="errormsg!=''">
+       {{errormsg}}
+   </div>
+     <a routerLink="/register" class="link">Not a member? Register here</a>
+
+    </div>
+
 
 </form>
 </mat-card-content>
-</mat-card>
-<!-- 
-<section class="vh-100">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-5 text-black">
+</mat-card> -->
 
-        <div class="px-5 ms-xl-4">
-          <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
-        </div>
-
-        <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
-
-          <form style="width: 23rem;">
-
-            <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h2>
-
-            <div class="form-outline mb-4">
-              <input type="text" id="form2Example18" name="username" [(ngModel)]="username" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example18">Username</label>
-            </div>
-
-            <div class="form-outline mb-4">
-              <input type="password" id="form2Example28" name="password" [(ngModel)]="password" class="form-control form-control-lg" />
-              <label class="form-label" for="form2Example28">Password</label>
-            </div>
-
-            <div class="pt-1 mb-4">
-              <button class="btn btn-info btn-lg btn-block" type="button" (click)="doLogin()">Login</button>
-            </div>
-
-          
-            <p>Don't have an account? <a href="/register" class="link-info">Register here</a></p>
-
-          </form>
-
-        </div>
-
+<div class="form-container">
+  <div class="form login">
+      <form [formGroup]="frm" (ngSubmit)="doLogin()">
+      <div class="title">
+         Login
       </div>
-      <div class="col-sm-7 px-0 d-none d-sm-block">
-        <img src="https://i.pinimg.com/originals/df/da/d3/dfdad37d9b8a7f3124978f3ea1244e9a.jpg"
-          alt="Login image" class="w-100 vh-100" style="object-fit: cover; object-position: left;">
-      </div>
+      <div class="input-container"> 
+         <input type="text" name="username" formControlName="username" class="input" placeholder="Username">
+     </div>
+     <div class="msg error" *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched)">
+      <span *ngIf="f['username'].errors?.['required']">
+          Username is required  
+    </span>
+   </div>
+  
+     <div class="input-container"> 
+         <input type="password" name="password" formControlName="password" class="input" placeholder="Password">
+     </div>
+     <div class="msg error" *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+      <span *ngIf="f['password'].errors?.['required']">
+          Password is required  
+    </span>
     </div>
+  
+     
+     <button type="submit" id="btnSubmit">Login</button>
+     <div class="msg light" *ngIf="errormsg!=''">
+         {{errormsg}}
+     </div>
+       <a routerLink="/register" class="link">Not a member? Signup here</a>
+      </form>
   </div>
-</section> -->
+  </div>

@@ -14,11 +14,11 @@ export class AuthService {
     
   }
 
-  login(username: string, password: string): Observable<boolean> {
-    const authRequest = {
-      username: username,
-      password: password
-    };
+  login(authRequest:any): Observable<boolean> {
+    // const authRequest = {
+    //   username: username,
+    //   password: password
+    // };
     return this.http.post('http://localhost:8081/authenticate', authRequest).pipe(
       map((response: any) => {
         console.log('response: ',JSON.stringify(response));

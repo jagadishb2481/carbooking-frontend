@@ -13,28 +13,37 @@ import { AuthService } from '../auth/auth.service';
 })
 
 export class LoginComponent {
-  username: any;
-  password: any;
-  message: any
-  error ='';
-  
-  constructor(private service:CarbookingService ,private router:Router, private authService:AuthService) { }
+  // username: any;
+  // password: any;
+  message: any;
+  errormsg ='';
+  frm!:FormGroup;
+  constructor(private service:CarbookingService ,private router:Router,private fb:FormBuilder, private authService:AuthService) { }
 
   ngOnInit() {
-    
+    this.frm= this.fb.group({
+      'username':['',Validators.required],
+      'password':['',Validators.required]
+    })
+  }
+  get f(){
+    return this.frm.controls;  // needed for validation in html file 
   }
 
   doLogin() {
-    this.authService.login(this.username, this.password)
-    .subscribe(data => {
-      console.log("data is: "+JSON.stringify(data));
-      this.message = data;
-      this.authService.setAuthenticated(true);
-     // window.localStorage.setItem("username",this.username);
-      //window.localStorage.setItem("password",this.password);
-     // localStorage.setItem('customerdata', JSON.stringify(data));
-      this.router.navigate(["/bookingHome"]);     
-    },
-    error=>console.log(error));
-  }
+    if(this.frm.valid){
+      this.authService.login(this.frm.value)
+      .subscribe(data => {
+        console.log("data is: "+JSON.stringify(data));
+        this.message = data;
+        this.authService.setAuthenticated(true);
+        this.router.navigate(["/bookingHome"]);     
+      },
+      error=>{this.errormsg='Username or Password is Wrong ';
+        console.log(error)});
+    }
+   
+
+    }
+    
 }
